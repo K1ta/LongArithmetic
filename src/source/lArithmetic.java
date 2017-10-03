@@ -18,6 +18,24 @@ public class lArithmetic {
         return res;
     }
 
+    public static LongNumber sum(LongNumber a, LongNumber b, int zeroing)
+    {
+        int maxLength = Math.max(a.getLength(), b.getLength());
+        LongNumber res = new LongNumber(maxLength);
+        int n = Math.max(a.getBitCount(), b.getBitCount());
+        long temp = 0;
+        for (int i = 0; i < n; i++) {
+            if(i % zeroing == 0)
+            {
+                temp = 0;
+            }
+            res.setBit(i, a.getBit(i) ^ b.getBit(i) ^ temp);
+            temp = (a.getBit(i) & b.getBit(i)) | (a.getBit(i) & temp) | (b.getBit(i) & temp);
+        }
+        res.countNumbers();
+        return res;
+    }
+
     public static LongNumber AND(LongNumber a, long b)
     {
         LongNumber res = new LongNumber(a.getLength());
@@ -34,6 +52,16 @@ public class lArithmetic {
         for(int i = 0; i < res.getLength(); i++)
         {
             res.setNumber(i, a.getNumber(i) | b.getNumber(i));
+        }
+        return res;
+    }
+
+    public static LongNumber XOR(LongNumber a, long b)
+    {
+        LongNumber res = new LongNumber(a.getLength());
+        for(int i = 0; i < res.getLength(); i++)
+        {
+            res.setNumber(i, a.getNumber(i) ^ b);
         }
         return res;
     }

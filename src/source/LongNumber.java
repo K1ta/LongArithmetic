@@ -18,6 +18,17 @@ public class LongNumber {
         countNumbers();
     }
 
+    public LongNumber(LongNumber l)
+    {
+        numbers = new long[l.length];
+        length = l.length;
+        for(int i = 0; i < length; i++)
+        {
+            numbers[i] = l.numbers[i];
+        }
+        bitCount = l.bitCount;
+    }
+
     public int getLength() {
         return length;
     }
@@ -42,7 +53,9 @@ public class LongNumber {
 
     public void setNumber(int n, long number)
     {
-        numbers[n] = number;
+        if(n < length) {
+            numbers[n] = number;
+        }
     }
 
     public void leftOffset(long bit)
@@ -112,42 +125,40 @@ public class LongNumber {
         //Главный цикл
         for(int i = bitCount - 1; i >= 0; i--)
         {
-            System.out.println("i: " + i);
-            tetrads.countNumbers();
-            for(int j = tetrads.bitCount - 1; j >= 0; j--)
-            {
-                System.out.print(tetrads.getBit(j));
-                if(j % 4 == 0)
-                {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
             //создаем LongNumber для коррекции
             LongNumber correction = lArithmetic.AND(tetrads,-8608480567731124088L);
+            correction = lArithmetic.XOR(correction, -8608480567731124088L);
             //сдвигаем тетрады и толкаем в них бит из числа
             tetrads.leftOffset(getBit(i));
-            LongNumber _correction = correction;
+            LongNumber _correction = new LongNumber(correction);
             _correction.rightOffset(2, 0);
             //определяем, нужна ли коррекция
             correction = lArithmetic.OR(correction, _correction);
             correction.add(3689348814741910323L);
+            correction.countNumbers();
+            tetrads.countNumbers();
             //корректируем
-            tetrads = lArithmetic.sum(tetrads, correction);
+            tetrads = lArithmetic.sum(tetrads, correction, 4);
         }
         for(int i = 0; i < tetrads.length; i++)
         {
-            tetrads.numbers[i] -= 2459565876494606883L;
+            tetrads.numbers[i] -= 3689348814741910323L;
         }
         System.out.println("result:");
         tetrads.countNumbers();
+        long res = 0;
         for(int i = tetrads.bitCount - 1; i >= 0; i--)
         {
-            System.out.print(tetrads.getBit(i));
+            res += (((tetrads.getBit(i) * (i % 4) * 2)));
+            if(i % 4 == 0)
+            {
+                System.out.print(res);
+            }
+            /*System.out.print(tetrads.getBit(i));
             if(i % 4 == 0)
             {
                 System.out.print(" ");
-            }
+            }*/
         }
     }
 }

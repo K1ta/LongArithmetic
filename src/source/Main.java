@@ -3,24 +3,23 @@ package source;
 public class Main {
 
     public static void main(String[] args) {
-        LongNumber a = new LongNumber(100);
-        LongNumber b = new LongNumber(100);
-        lArithmetic.sum(a, b).print();
+        /*LongNumber a = new LongNumber();
+        LongNumber b = new LongNumber(1, 5);
+        lArithmetic.sum(a, b).print();*/
+        fibonacci(333);
     }
 
-    public static LongNumber F(int n) {
-        if (n < 3) {
-            return new LongNumber(1);
+    public static void fibonacci(int n)
+    {
+        LongNumber prev = new LongNumber(1,0);
+        LongNumber cur = new LongNumber(1, 1);
+        for(int i = 0; i < n; i++)
+        {
+            System.out.print((i + 1) + ":");
+            prev.print();
+            LongNumber temp = new LongNumber(cur);
+            cur = lArithmetic.sum(prev, cur);
+            prev = temp;
         }
-        LongNumber prev = new LongNumber(1);
-        LongNumber cur = new LongNumber(1);
-        LongNumber res = null;
-        for (int i = 0; i < n; i++) {
-            res = lArithmetic.sum(prev, cur);
-            prev = cur;
-            cur = res;
-            //res.print();
-        }
-        return res;
     }
 }

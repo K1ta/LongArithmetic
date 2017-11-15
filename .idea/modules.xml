@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LongArithmetic.iml" filepath="$PROJECT_DIR$/LongArithmetic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/episode0.iml" filepath="$PROJECT_DIR$/.idea/modules/episode0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/episode0_main.iml" filepath="$PROJECT_DIR$/.idea/modules/episode0_main.iml" group="episode0" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/episode0_test.iml" filepath="$PROJECT_DIR$/.idea/modules/episode0_test.iml" group="episode0" />
     </modules>
   </component>
 </project>
